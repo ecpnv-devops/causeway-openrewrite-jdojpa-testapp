@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -12,16 +13,16 @@
     <name>SimpleApp (JPA) - Webapp</name>
 
     <description>
-    	Assembles and runs both the Wicket viewer and the Restfulobjects viewer
-    	in a single webapp configured to run using the JPA/EclipseLink object store.
+        Assembles and runs the Wicket viewer, the Restfulobjects viewer and the GraphQL viewer
+        in a single webapp configured to run using the JPA/EclipseLink object store.
     </description>
 
     <packaging>jar</packaging>
 
     <properties>
-		<!-- https://stackoverflow.com/questions/38983934/cannot-get-maven-project-version-property-in-a-spring-application-with-value/38983935#38983935 -->
-		<resource.delimiter>^</resource.delimiter>
-	</properties>
+        <!-- https://stackoverflow.com/questions/38983934/cannot-get-maven-project-version-property-in-a-spring-application-with-value/38983935#38983935 -->
+        <resource.delimiter>^</resource.delimiter>
+    </properties>
 
     <build>
         <resources>
@@ -69,7 +70,9 @@
                 <configuration>
                     <classifier>exec</classifier>
                     <agents>
-                        <agent>${settings.localRepository}/org/springframework/spring-instrument/${spring-framework.version}/spring-instrument-${spring-framework.version}.jar</agent>
+                        <agent>
+                            ${settings.localRepository}/org/springframework/spring-instrument/${spring-framework.version}/spring-instrument-${spring-framework.version}.jar
+                        </agent>
                     </agents>
                     <requiresUnpack>
                         <dependency>
@@ -96,13 +99,13 @@
             <type>pom</type>
         </dependency>
         <dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-wicket-viewer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
-		</dependency>
+            <groupId>org.apache.causeway.viewer</groupId>
+            <artifactId>causeway-viewer-wicket-viewer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.causeway.viewer</groupId>
+            <artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.causeway.persistence</groupId>
@@ -264,8 +267,8 @@
             <dependencies>
                 <dependency>
                     <groupId>org.postgresql</groupId>
-		    		<artifactId>postgresql</artifactId>
-					<!-- <version>42.2.12</version> ... version already managed -->
+                    <artifactId>postgresql</artifactId>
+                    <!-- <version>42.2.12</version> ... version already managed -->
                 </dependency>
             </dependencies>
         </profile>
@@ -284,7 +287,7 @@
                         <artifactId>jib-maven-plugin</artifactId>
                         <configuration>
                             <from>
-                                <image>adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.10_9</image>
+                                <image>eclipse-temurin:21.0.2_13-jdk-alpine</image>
                             </from>
                             <container>
                                 <jvmFlags>
