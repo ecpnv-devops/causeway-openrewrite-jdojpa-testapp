@@ -5,6 +5,8 @@ import java.io.InputStream;
 
 import javax.inject.Inject;
 
+import org.apache.causeway.testing.fakedata.applib.services.Addresses;
+
 import org.springframework.core.io.ClassPathResource;
 
 import org.apache.causeway.applib.services.clock.ClockService;
@@ -14,6 +16,10 @@ import org.apache.causeway.testing.fakedata.applib.services.FakeDataService;
 import org.apache.causeway.testing.fixtures.applib.personas.BuilderScriptWithResult;
 import org.apache.causeway.testing.fixtures.applib.personas.Persona;
 import org.apache.causeway.testing.fixtures.applib.setup.PersonaEnumPersistAll;
+
+import domainapp.modules.simple.dom.cc.EmailAddress;
+
+import domainapp.modules.simple.dom.cc.PostalAddress;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -71,7 +77,43 @@ implements Persona<SimpleObject, SimpleObject_persona.Builder> {
 
             simpleObject.setLastCheckedIn(clockService.getClock().nowAsLocalDate().plusDays(fakeDataService.ints().between(-10, +10)));
 
+            fakeDataService.enums().anyOf(CommChannel.class).handle(simpleObject, serviceRegistry);
+
             return simpleObject;
+        }
+
+        static enum CommChannel {
+            NONE {
+                @Override
+                void handle(SimpleObject simpleObject, ServiceRegistry serviceRegistry) {
+                }
+            },
+            EMAIL{
+                @Override
+                void handle(SimpleObject simpleObject, ServiceRegistry serviceRegistry) {
+                    val fakeDataService = serviceRegistry.lookupServiceElseFail(FakeDataService.class);
+                    String firstName = fakeDataService.name().firstName();
+                    String lastName = fakeDataService.name().lastName();
+                    String emailAddr = firstName + "." + lastName + "@" + lastName + ".com";
+                    EmailAddress sendTo = new EmailAddress();
+                    sendTo.setEmailAddress(emailAddr);
+                    simpleObject.setSendTo(sendTo);
+                }
+            },
+            POSTAL{
+                @Override
+                void handle(SimpleObject simpleObject, ServiceRegistry serviceRegistry) {
+                    val fakeDataService = serviceRegistry.lookupServiceElseFail(FakeDataService.class);
+                    PostalAddress sendTo = new PostalAddress();
+                    sendTo.setAddress1(fakeDataService.addresses().streetAddressNumber());
+                    sendTo.setAddress2(fakeDataService.addresses().streetName());
+                    sendTo.setCity(fakeDataService.addresses().city());
+                    simpleObject.setSendTo(sendTo);
+                }
+            };
+
+            abstract void handle(SimpleObject simpleObject, ServiceRegistry serviceRegistry);
+
         }
 
         @SneakyThrows

@@ -2,6 +2,7 @@ package domainapp.webapp.application.services.homepage;
 
 import domainapp.modules.simple.SimpleModule;
 
+import domainapp.modules.simple.dom.cc.CommunicationChannel;
 import domainapp.modules.simple.dom.so.SimpleObject;
 
 import lombok.AccessLevel;
@@ -17,8 +18,10 @@ import javax.inject.Named;
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.apache.causeway.applib.annotation.Nature;
+import org.apache.causeway.applib.annotation.ObjectSupport;
 import org.apache.causeway.applib.annotation.Property;
 import org.apache.causeway.applib.annotation.PropertyLayout;
+import org.apache.causeway.applib.annotation.Title;
 import org.apache.causeway.applib.services.title.TitleService;
 
 @Named(SimpleModule.NAMESPACE + ".SimpleObjectItem")
@@ -40,14 +43,15 @@ public class SimpleObjectItem {
     @Getter @Setter
     private SimpleObject simpleObject;
 
+    @ObjectSupport
     public String title() {
         return titleService.titleOf(getSimpleObject());
     }
 
     @Property()
     @PropertyLayout(sequence = "1.4")
-    public String getSendTo() {
-        return getSimpleObject().getName();
+    public CommunicationChannel getSendTo() {
+        return getSimpleObject().getSendTo();
     }
 
     @Inject TitleService titleService;

@@ -49,6 +49,8 @@ import org.apache.causeway.extensions.pdfjs.applib.annotations.PdfJsViewer;
 import static org.apache.causeway.applib.annotation.SemanticsOf.IDEMPOTENT;
 import static org.apache.causeway.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
+import domainapp.modules.simple.dom.cc.CommunicationChannel;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -114,11 +116,19 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
     @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.IDENTITY, sequence = "1")
     private String name;
 
+    @Column(name = "sendToCommunicationChannelId", allowsNull = "true")
+    @Persistent
+    @Getter @Setter
+    @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "2.1")
+    private CommunicationChannel sendTo;
+
+
     @Notes
     @Getter @Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "2")
+    @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "2.2")
     private String notes;
+
 
 
     @PdfJsViewer
