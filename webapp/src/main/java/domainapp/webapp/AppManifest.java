@@ -70,7 +70,7 @@ import domainapp.webapp.quartz.QuartzModule;
 
         CausewayModuleExtLayoutLoadersGithub.class,
         CausewayModuleExtTabularExcel.class,
-        CausewayModuleExtFullCalendarWicketUi.class,
+        // CausewayModuleExtFullCalendarWicketUi.class,
         CausewayModuleExtPdfjsWicketUi.class,
 
         CausewayModuleValAsciidocMetaModel.class, // for pretty rendering of DTO objects such as CommandDto, InteractionDto
