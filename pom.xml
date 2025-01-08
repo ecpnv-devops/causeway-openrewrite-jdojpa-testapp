@@ -42,7 +42,7 @@
                 <version>5.47.3</version>
                 <configuration>
                     <activeRecipes>
-                        <recipe>com.ecpnv.openrewrite.jdo2jpa</recipe>
+                        <recipe>com.ecpnv.openrewrite.jdo2jpa.v2x</recipe>
                     </activeRecipes>
                 </configuration>
                 <dependencies>
