@@ -13,6 +13,14 @@
                 <mb3:serviceAction objectType="simple.SimpleObjects" id="listAll"/>
             </mb3:section>
         </mb3:menu>
+        <mb3:menu>
+            <mb3:named>Persons</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction objectType="simple.Persons" id="create"/>
+                <mb3:serviceAction objectType="simple.Persons" id="findByEmail"/>
+                <mb3:serviceAction objectType="simple.Persons" id="listAll"/>
+            </mb3:section>
+        </mb3:menu>
         <mb3:menu unreferencedActions="true">
             <mb3:named>Other</mb3:named>
         </mb3:menu>

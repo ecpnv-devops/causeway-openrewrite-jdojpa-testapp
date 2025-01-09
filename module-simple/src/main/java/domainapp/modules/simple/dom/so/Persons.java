@@ -44,6 +44,7 @@ public class Persons {
         return repositoryService.persist(p);
     }
 
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     public Person findByEmail(final String email) {
         return repositoryService.firstMatch(
                         Query.named(Person.class, Person.NAMED_QUERY__FIND_BY_EMAIL)

@@ -22,9 +22,11 @@ import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.apache.causeway.applib.annotation.Optionality;
 import org.apache.causeway.applib.annotation.Property;
+import org.apache.causeway.applib.annotation.PropertyLayout;
 import org.apache.causeway.applib.annotation.Publishing;
 import org.apache.causeway.applib.annotation.TableDecorator;
 import org.apache.causeway.applib.annotation.Title;
+import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.jaxb.PersistentEntityAdapter;
 
 import lombok.AccessLevel;
@@ -61,6 +63,7 @@ public class Person implements Comparable<Person> {
     static final String NAMED_QUERY__FIND_BY_EMAIL = "Person.findByEmail";
 
     @Title(sequence = "1.0")
+    @PropertyLayout(hidden = Where.NOWHERE)
     @Getter @Setter @ToString.Include
     private String firstName;
 
@@ -71,6 +74,7 @@ public class Person implements Comparable<Person> {
     private String lastName;
 
     @Email
+    @PropertyLayout(hidden = Where.NOWHERE)
     @Getter @Setter
     private String email;
 
