@@ -141,6 +141,11 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
     @Getter @Setter
     private java.time.LocalDate lastCheckedIn;
 
+    @Property(optionality = Optionality.OPTIONAL, editing = Editing.ENABLED)
+    @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "4")
+    @Column(allowsNull = "true")
+    @Getter @Setter
+    private Person owner;
 
     @Override
     public String getCalendarName() {

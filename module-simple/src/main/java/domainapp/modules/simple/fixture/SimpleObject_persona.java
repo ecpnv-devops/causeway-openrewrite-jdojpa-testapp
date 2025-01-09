@@ -38,7 +38,12 @@ implements Persona<SimpleObject, SimpleObject_persona.Builder> {
     BIP("Bip", null),
     BOP("Bop", null),
     BANG("Bang", "Bang.pdf"),
-    BOO("Boo", null);
+    BOO("Boo", null),
+    LIGHTSABER("Lightsaber", null),
+    DT15("DT-15 Blaster pistol", null),
+    EL16("EL-16 blaster rifle ", null),
+    BOWCASTER("Bowcaster", null),
+    THEFORCE("The Force", null);
 
     private final String name;
     private final String contentFileName;
@@ -50,7 +55,7 @@ implements Persona<SimpleObject, SimpleObject_persona.Builder> {
 
     @Override
     public SimpleObject findUsing(final ServiceRegistry serviceRegistry) {
-        return serviceRegistry.lookupService(SimpleObjects.class).map(x -> x.findByNameExact(name)).orElseThrow();
+        return serviceRegistry.lookupService(SimpleObjects.class).map(x -> x.findByNameExact(name)).orElse(null);
     }
 
     @Accessors(chain = true)
