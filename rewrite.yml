@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: petclinic.rename.package
+displayName: Rename package name
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: domainapp
+      newPackageName: petclinicapp

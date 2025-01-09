@@ -143,5 +143,25 @@
                 </repository>
             </repositories>
         </profile>
+
+        <profile>
+            <id>telemetry</id>
+            <activation>
+                <property>
+                    <name>telemetry</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.opentelemetry.contrib</groupId>
+                        <artifactId>opentelemetry-maven-extension</artifactId>
+                        <version>1.14.0-alpha</version>
+                        <extensions>true</extensions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 </project>
