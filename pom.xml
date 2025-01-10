@@ -156,4 +156,19 @@
         </profile>
 
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/ecpnv-devops/jdo2jpa</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/ecpnv-devops/jdo2jpa</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 </project>
