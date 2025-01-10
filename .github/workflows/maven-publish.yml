@@ -48,7 +48,7 @@ jobs:
     - name: debug PACKAGE_ACCESS_TOKEN
       run: echo $PACKAGE_ACCESS_TOKEN
       env:
-        PACKAGE_ACCESS_TOKEN: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
+        PACKAGE_ACCESS_TOKEN: ${{ vars.PACKAGE_ACCESS_TOKEN }}
 
 #    - name: Run open rewrite
       #run: mvn rewrite:run -s .m2/settings.xml
