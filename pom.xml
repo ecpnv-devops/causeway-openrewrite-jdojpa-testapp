@@ -27,14 +27,6 @@
     </properties>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>io.takari.maven</groupId>
-                <artifactId>maven-timeline</artifactId>
-                <version>${maven-timeline.version}</version>
-            </extension>
-        </extensions>
-
         <plugins>
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
