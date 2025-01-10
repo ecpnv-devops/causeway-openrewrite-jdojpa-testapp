@@ -46,22 +46,30 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: debug PACKAGE_ACCESS_TOKEN as env var
-      run: echo $PACKAGE_ACCESS_TOKEN
+      run: |
+        char_count=${#PACKAGE_ACCESS_TOKEN}
+        echo "The var '$PACKAGE_ACCESS_TOKEN' has $char_count characters."
       env:
         PACKAGE_ACCESS_TOKEN: ${{ vars.PACKAGE_ACCESS_TOKEN }}
 
     - name: debug PACKAGE_ACCESS_TOKEN as secret
-      run: echo $PACKAGE_ACCESS_TOKEN
+      run: |
+        char_count=${#PACKAGE_ACCESS_TOKEN}
+        echo "The var '$PACKAGE_ACCESS_TOKEN' has $char_count characters."
       env:
         PACKAGE_ACCESS_TOKEN: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
 
     - name: debug PACKAGE_ACCESS as env var
-      run: echo $PACKAGE_ACCESS
+      run: |
+        char_count=${#PACKAGE_ACCESS}
+        echo "The var '$PACKAGE_ACCESS' has $char_count characters."
       env:
         PACKAGE_ACCESS: ${{ vars.PACKAGE_ACCESS }}
 
     - name: debug PACKAGE_ACCESS as secret
-      run: echo $PACKAGE_ACCESS
+      run: |
+        char_count=${#PACKAGE_ACCESS}
+        echo "The var '$PACKAGE_ACCESS' has $char_count characters."
       env:
         PACKAGE_ACCESS: ${{ secrets.PACKAGE_ACCESS }}
 
