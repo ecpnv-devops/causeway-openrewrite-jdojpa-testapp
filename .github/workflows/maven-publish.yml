@@ -38,8 +38,8 @@ jobs:
     - name: Run open rewrite
       run: mvn rewrite:run -s .m2/settings.xml
       env:
-        GITHUB_ACTOR: ${{ github.actor }}
-        PACKAGE_ACCESS_TOKEN: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
+        READ_PACKAGES_USERNAME: ${{ secrets.READ_PACKAGES_USERNAME }}
+        READ_PACKAGES_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
