@@ -35,50 +35,11 @@ jobs:
 #    - name: Build with Maven
 #      run: mvn -B package --file pom.xml
 
-    - name: debug GITHUB_ACTOR
-      run: echo $GITHUB_ACTOR
+    - name: Run open rewrite
+      run: mvn rewrite:run -s .m2/settings.xml
       env:
         GITHUB_ACTOR: ${{ github.actor }}
-
-    - name: debug GITHUB_TOKEN
-      run: echo $GITHUB_TOKEN
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: debug PACKAGE_ACCESS_TOKEN as env var
-      run: |
-        char_count=${#PACKAGE_ACCESS_TOKEN}
-        echo "The var '$PACKAGE_ACCESS_TOKEN' has $char_count characters."
-      env:
-        PACKAGE_ACCESS_TOKEN: ${{ vars.PACKAGE_ACCESS_TOKEN }}
-
-    - name: debug PACKAGE_ACCESS_TOKEN as secret
-      run: |
-        char_count=${#PACKAGE_ACCESS_TOKEN}
-        echo "The var '$PACKAGE_ACCESS_TOKEN' has $char_count characters."
-      env:
         PACKAGE_ACCESS_TOKEN: ${{ secrets.PACKAGE_ACCESS_TOKEN }}
-
-    - name: debug PACKAGE_ACCESS as env var
-      run: |
-        char_count=${#PACKAGE_ACCESS}
-        echo "The var '$PACKAGE_ACCESS' has $char_count characters."
-      env:
-        PACKAGE_ACCESS: ${{ vars.PACKAGE_ACCESS }}
-
-    - name: debug PACKAGE_ACCESS as secret
-      run: |
-        char_count=${#PACKAGE_ACCESS}
-        echo "The var '$PACKAGE_ACCESS' has $char_count characters."
-      env:
-        PACKAGE_ACCESS: ${{ secrets.PACKAGE_ACCESS }}
-
-
-#    - name: Run open rewrite
-      #run: mvn rewrite:run -s .m2/settings.xml
-#      env:
-#        GITHUB_ACTOR: ${{ github.actor }}
-#        GITHUB_TOKEN: ${{ github.token }}
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
