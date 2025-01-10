@@ -30,22 +30,23 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         server-id: github
-        settings-path: ${{ github.workspace }}
+        server-username: ${{ secrets.READ_PACKAGES_USERNAME }}
+        server-password: ${{ secrets.READ_PACKAGES_TOKEN }}
 
 #    - name: Build with Maven
 #      run: mvn -B package --file pom.xml
 
-    - name: Run open rewrite
-      run: |
-        char_count=${#READ_PACKAGES_USERNAME}
-        echo "The var '$READ_PACKAGES_USERNAME' has $char_count characters."
-        char_count=${#READ_PACKAGES_TOKEN}
-        echo "The var '$READ_PACKAGES_TOKEN' has $char_count characters."
-        echo "running rewrite..."
-        mvn rewrite:run -s .m2/settings.xml
-      env:
-        READ_PACKAGES_USERNAME: ${{ secrets.READ_PACKAGES_USERNAME }}
-        READ_PACKAGES_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
+#    - name: Run open rewrite
+#      run: |
+#        char_count=${#READ_PACKAGES_USERNAME}
+#        echo "The var '$READ_PACKAGES_USERNAME' has $char_count characters."
+#        char_count=${#READ_PACKAGES_TOKEN}
+#        echo "The var '$READ_PACKAGES_TOKEN' has $char_count characters."
+#        echo "running rewrite..."
+#        mvn rewrite:run
+#      env:
+#        READ_PACKAGES_USERNAME: ${{ secrets.READ_PACKAGES_USERNAME }}
+#        READ_PACKAGES_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
