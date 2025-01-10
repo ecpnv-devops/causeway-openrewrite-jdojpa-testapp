@@ -29,17 +29,29 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        server-id: github
+        settings-path: ${{ github.workspace }}
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+#    - name: Build with Maven
+#      run: mvn -B package --file pom.xml
 
-    - name: Run open rewrite
-      run: mvn rewrite:run -s .m2/settings.xml
+    - name: debug GITHUB_ACTOR
+      run: echo $GITHUB_ACTOR
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: debug GITHUB_TOKEN
+      run: echo $GITHUB_TOKEN
+      env:
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ github.token }}
+
+#    - name: Run open rewrite
+      #run: mvn rewrite:run -s .m2/settings.xml
+#      env:
+#        GITHUB_ACTOR: ${{ github.actor }}
+#        GITHUB_TOKEN: ${{ github.token }}
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
