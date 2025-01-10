@@ -45,10 +45,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: debug PACKAGE_ACCESS_TOKEN
-      run: echo $PACKAGE_ACCESS_TOKEN
+    - name: debug DUMMY
+      run: echo $DUMMY
       env:
-        PACKAGE_ACCESS_TOKEN: ${{ vars.PACKAGE_ACCESS_TOKEN }}
+        DUMMY: ${{ vars.DUMMY }}
 
 
 #    - name: Run open rewrite
