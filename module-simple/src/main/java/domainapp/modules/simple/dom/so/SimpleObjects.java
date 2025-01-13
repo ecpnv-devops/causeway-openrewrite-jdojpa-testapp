@@ -50,6 +50,10 @@ public class SimpleObjects {
                         .withParameter("name", name));
     }
 
+    public List<SimpleObject> autoComplete(final String name) {
+        return findByName(name);
+    }
+
 
     public SimpleObject findByNameExact(final String name) {
         return repositoryService.firstMatch(

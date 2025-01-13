@@ -17,9 +17,12 @@ import javax.jdo.annotations.VersionStrategy;
 import javax.validation.constraints.Email;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.causeway.applib.annotation.Action;
 import org.apache.causeway.applib.annotation.BookmarkPolicy;
+import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.DomainObjectLayout;
+import org.apache.causeway.applib.annotation.Editing;
 import org.apache.causeway.applib.annotation.Optionality;
 import org.apache.causeway.applib.annotation.Property;
 import org.apache.causeway.applib.annotation.PropertyLayout;
@@ -51,7 +54,7 @@ import domainapp.modules.simple.SimpleModule;
 @DatastoreIdentity(strategy = IdGeneratorStrategy.IDENTITY, column = "id")
 @Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @Named(SimpleModule.NAMESPACE + ".Person")
-@DomainObject(entityChangePublishing = Publishing.ENABLED)
+@DomainObject(editing = Editing.ENABLED, entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout(
         tableDecorator = TableDecorator.DatatablesNet.class,
         bookmarking = BookmarkPolicy.AS_ROOT)
@@ -78,9 +81,10 @@ public class Person implements Comparable<Person> {
     @Getter @Setter
     private String email;
 
-    @Persistent(mappedBy = "owner")
+    @Collection
+    @Persistent(mappedBy = "owner", dependentElement = "true")
     @Getter @Setter
-    private Set<SimpleObject> simpleObjects;
+    private Set<SimpleObject> starWarsObjects;
 
     @Override
     public int compareTo(Person other) {
@@ -89,10 +93,11 @@ public class Person implements Comparable<Person> {
                 .compare(this, other);
     }
 
-    public void addSimpleObject(SimpleObject simpleObject) {
-        if (simpleObjects != null) {
-            simpleObjects.add(simpleObject);
-            simpleObject.setOwner(this);
+    @Action
+    public void addStarWarsObject(SimpleObject starWarsObject) {
+        if (starWarsObjects != null) {
+            starWarsObjects.add(starWarsObject);
+            starWarsObject.setOwner(this);
         }
     }
 }

@@ -73,7 +73,7 @@ public enum Person_persona
                         if (so == null) so = sop.build(this, ec);
                         return so;
                     })
-                    .forEach(person::addSimpleObject);
+                    .forEach(person::addStarWarsObject);
             return person;
         }
 

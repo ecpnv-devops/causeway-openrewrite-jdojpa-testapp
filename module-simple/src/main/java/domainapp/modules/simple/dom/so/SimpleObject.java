@@ -84,7 +84,7 @@ import domainapp.modules.simple.types.Notes;
 @DatastoreIdentity(strategy=IdGeneratorStrategy.IDENTITY, column="id")
 @Version(strategy= VersionStrategy.DATE_TIME, column="version")
 @Named(SimpleModule.NAMESPACE + ".SimpleObject")
-@DomainObject(entityChangePublishing = Publishing.ENABLED)
+@DomainObject(autoCompleteRepository = SimpleObjects.class, entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout(
         tableDecorator = TableDecorator.DatatablesNet.class,
         bookmarking = BookmarkPolicy.AS_ROOT)
@@ -143,7 +143,8 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
 
     @Property(optionality = Optionality.OPTIONAL, editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "4")
-    @Column(allowsNull = "true")
+    @Persistent(defaultFetchGroup = "true")
+    @Column(name = "personId", allowsNull = "true")
     @Getter @Setter
     private Person owner;
 
