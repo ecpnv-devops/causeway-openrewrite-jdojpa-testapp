@@ -14,7 +14,7 @@ import org.apache.causeway.applib.annotation.Property;
 import org.apache.causeway.applib.annotation.PropertyLayout;
 import org.apache.causeway.applib.annotation.Where;
 
-@Column(length = Notes.MAX_LEN, allowsNull = "true")
+@Column(length = Notes.MAX_LEN, allowsNull = "true", jdbcType = "CLOB", sqlType = "LONGVARCHAR")
 @Property(editing = Editing.ENABLED, maxLength = Notes.MAX_LEN)
 @PropertyLayout(named = "Notes", multiLine = 10, hidden = Where.ALL_TABLES)
 @Parameter(maxLength = Notes.MAX_LEN)
