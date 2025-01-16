@@ -20,8 +20,6 @@ import javax.jdo.annotations.Version;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.springframework.lang.Nullable;
-
 import org.apache.causeway.applib.annotation.Action;
 import org.apache.causeway.applib.annotation.ActionLayout;
 import org.apache.causeway.applib.annotation.BookmarkPolicy;
@@ -41,10 +39,8 @@ import org.apache.causeway.applib.layout.LayoutConstants;
 import org.apache.causeway.applib.services.message.MessageService;
 import org.apache.causeway.applib.services.repository.RepositoryService;
 import org.apache.causeway.applib.services.title.TitleService;
-import org.apache.causeway.applib.value.Blob;
 import org.apache.causeway.extensions.fullcalendar.applib.CalendarEventable;
 import org.apache.causeway.extensions.fullcalendar.applib.value.CalendarEvent;
-import org.apache.causeway.extensions.pdfjs.applib.annotations.PdfJsViewer;
 
 import static org.apache.causeway.applib.annotation.SemanticsOf.IDEMPOTENT;
 import static org.apache.causeway.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
@@ -121,20 +117,6 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
     private String notes;
 
 
-    @PdfJsViewer
-    @Getter @Setter
-    @Persistent(defaultFetchGroup="false", columns = {
-            @Column(name = "attachment_name"),
-            @Column(name = "attachment_mimetype"),
-            @Column(name = "attachment_bytes")
-    })
-    @Property(optionality = Optionality.OPTIONAL)
-    @PropertyLayout(fieldSetId = "content", sequence = "1")
-    private Blob attachment;
-
-
-
-
     @Property(optionality = Optionality.OPTIONAL, editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "3")
     @Column(allowsNull = "true")
@@ -186,21 +168,6 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
     }
     static final String PROHIBITED_CHARACTERS = "&%$!";
 
-
-
-    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @ActionLayout(associateWith = "attachment", position = ActionLayout.Position.PANEL)
-    public SimpleObject updateAttachment(
-            @Nullable final Blob attachment) {
-        setAttachment(attachment);
-        return this;
-    }
-    @MemberSupport public Blob default0UpdateAttachment() {
-        return getAttachment();
-    }
-
-
-
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             fieldSetId = LayoutConstants.FieldSetId.IDENTITY,
@@ -211,8 +178,6 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
         messageService.informUser(String.format("'%s' deleted", title));
         repositoryService.removeAndFlush(this);
     }
-
-
 
     private final static Comparator<SimpleObject> comparator =
             Comparator.comparing(SimpleObject::getName);

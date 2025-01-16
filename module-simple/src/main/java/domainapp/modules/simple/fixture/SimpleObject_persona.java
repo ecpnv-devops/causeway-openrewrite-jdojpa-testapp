@@ -9,7 +9,6 @@ import org.springframework.core.io.ClassPathResource;
 
 import org.apache.causeway.applib.services.clock.ClockService;
 import org.apache.causeway.applib.services.registry.ServiceRegistry;
-import org.apache.causeway.applib.value.Blob;
 import org.apache.causeway.testing.fakedata.applib.services.FakeDataService;
 import org.apache.causeway.testing.fixtures.applib.personas.BuilderScriptWithResult;
 import org.apache.causeway.testing.fixtures.applib.personas.Persona;
@@ -29,24 +28,23 @@ import domainapp.modules.simple.dom.so.SimpleObjects;
 public enum SimpleObject_persona
 implements Persona<SimpleObject, SimpleObject_persona.Builder> {
 
-    FOO("Foo", "Foo.pdf"),
-    BAR("Bar", "Bar.pdf"),
-    BAZ("Baz", null),
-    FRODO("Frodo", "Frodo.pdf"),
-    FROYO("Froyo", null),
-    FIZZ("Fizz", "Fizz.pdf"),
-    BIP("Bip", null),
-    BOP("Bop", null),
-    BANG("Bang", "Bang.pdf"),
-    BOO("Boo", null),
-    LIGHTSABER("Lightsaber", null),
-    DT15("DT-15 Blaster pistol", null),
-    EL16("EL-16 blaster rifle ", null),
-    BOWCASTER("Bowcaster", null),
-    THEFORCE("The Force", null);
+    FOO("Foo"),
+    BAR("Bar"),
+    BAZ("Baz"),
+    FRODO("Frodo"),
+    FROYO("Froyo"),
+    FIZZ("Fizz"),
+    BIP("Bip"),
+    BOP("Bop"),
+    BANG("Bang"),
+    BOO("Boo"),
+    LIGHTSABER("Lightsaber"),
+    DT15("DT-15 Blaster pistol"),
+    EL16("EL-16 blaster rifle "),
+    BOWCASTER("Bowcaster"),
+    THEFORCE("The Force");
 
     private final String name;
-    private final String contentFileName;
 
     @Override
     public Builder builder() {
@@ -67,12 +65,6 @@ implements Persona<SimpleObject, SimpleObject_persona.Builder> {
         protected SimpleObject buildResult(final ExecutionContext ec) {
 
             val simpleObject = wrap(simpleObjects).create(persona.name);
-
-            if (persona.contentFileName != null) {
-                val bytes = toBytes(persona.contentFileName);
-                val attachment = new Blob(persona.contentFileName, "application/pdf", bytes);
-                simpleObject.updateAttachment(attachment);
-            }
 
             simpleObject.setLastCheckedIn(clockService.getClock().nowAsLocalDate().plusDays(fakeDataService.ints().between(-10, +10)));
 
