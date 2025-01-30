@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.inject.Named;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.DatastoreIdentity;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -31,6 +33,7 @@ import org.apache.causeway.applib.annotation.TableDecorator;
 import org.apache.causeway.applib.annotation.Title;
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.jaxb.PersistentEntityAdapter;
+import org.apache.causeway.applib.layout.LayoutConstants;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -41,6 +44,7 @@ import lombok.ToString;
 import domainapp.modules.simple.SimpleModule;
 
 @PersistenceCapable(schema = SimpleModule.SCHEMA)
+@Discriminator(strategy = DiscriminatorStrategy.CLASS_NAME)
 @Uniques({
         @Unique(name = "Person__name__UNQ", members = {"firstName", "lastName"}),
         @Unique(name = "Person__email__UNQ", members = {"email"})
@@ -85,6 +89,13 @@ public class Person implements Comparable<Person> {
     @Persistent(mappedBy = "owner", dependentElement = "true")
     @Getter @Setter
     private Set<SimpleObject> starWarsObjects;
+
+    @Property(optionality = Optionality.OPTIONAL, editing = Editing.ENABLED)
+    @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "5.0")
+    @Persistent(defaultFetchGroup = "true")
+    @Column(name = "managerId", allowsNull = "true")
+    @Getter @Setter
+    private Manager manager;
 
     @Override
     public int compareTo(Person other) {
