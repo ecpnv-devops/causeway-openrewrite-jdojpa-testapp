@@ -9,6 +9,7 @@ import javax.jdo.annotations.DatastoreIdentity;
 import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -52,6 +53,8 @@ import domainapp.modules.simple.SimpleModule;
         @Unique(name = "Person__name__UNQ", members = {"firstName", "lastName"}),
         @Unique(name = "Person__email__UNQ", members = {"email"})
 })
+@Index(name = "Person__name__IDX", members = {"firstName", "lastName"})
+@Index(name = "Person__manager__IDX", members = {"manager"})
 @Query(
         name = Person.NAMED_QUERY__FIND_BY_EMAIL,
         value = "SELECT " +

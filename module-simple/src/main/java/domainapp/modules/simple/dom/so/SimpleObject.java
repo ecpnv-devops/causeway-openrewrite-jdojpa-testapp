@@ -10,6 +10,7 @@ import javax.jdo.annotations.Column;
 import javax.jdo.annotations.DatastoreIdentity;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Index;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -63,6 +64,7 @@ import domainapp.modules.simple.types.Notes;
 @Unique(
         name = "SimpleObject__name__UNQ", members = { "name" }
 )
+@Index(name="SimpleObject__lastCheckedIn__IDX", members={"lastCheckedIn"})
 @Queries({
         @Query(
                 name = SimpleObject.NAMED_QUERY__FIND_BY_NAME_LIKE,
@@ -127,6 +129,7 @@ public class SimpleObject implements Comparable<SimpleObject>, CalendarEventable
     @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "4")
     @Persistent(defaultFetchGroup = "true")
     @Column(name = "personId", allowsNull = "true")
+    @Index(name="personIndex")
     @Getter @Setter
     private Person owner;
 
