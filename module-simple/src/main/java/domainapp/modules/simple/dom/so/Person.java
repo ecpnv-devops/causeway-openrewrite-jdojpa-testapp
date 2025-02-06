@@ -8,10 +8,12 @@ import javax.jdo.annotations.Column;
 import javax.jdo.annotations.DatastoreIdentity;
 import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.DiscriminatorStrategy;
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.Index;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.Query;
@@ -64,7 +66,8 @@ import domainapp.modules.simple.SimpleModule;
 @DatastoreIdentity(strategy = IdGeneratorStrategy.IDENTITY, column = "id")
 @Version(strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 @Named(SimpleModule.NAMESPACE + ".Person")
-@DomainObject(editing = Editing.ENABLED, entityChangePublishing = Publishing.ENABLED)
+@DomainObject(editing = Editing.ENABLED, entityChangePublishing = Publishing.ENABLED,
+        autoCompleteRepository = Persons.class)
 @DomainObjectLayout(
         tableDecorator = TableDecorator.DatatablesNet.class,
         bookmarking = BookmarkPolicy.AS_ROOT)
@@ -96,6 +99,13 @@ public class Person implements Comparable<Person> {
     @Getter @Setter
     private Set<SimpleObject> starWarsObjects;
 
+    @Collection
+    @Persistent(table = "person_other_object", dependentElement = "true")
+    @Join(column = "personId")
+    @Element(column = "otherObjectId")
+    @Getter @Setter
+    private Set<SimpleObject> otherObjects;
+
     @Property(optionality = Optionality.OPTIONAL, editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = LayoutConstants.FieldSetId.DETAILS, sequence = "5.0")
     @Persistent(defaultFetchGroup = "true")
@@ -111,10 +121,19 @@ public class Person implements Comparable<Person> {
     }
 
     @Action
-    public void addStarWarsObject(SimpleObject starWarsObject) {
+    public Person addStarWarsObject(SimpleObject starWarsObject) {
         if (starWarsObjects != null) {
             starWarsObjects.add(starWarsObject);
             starWarsObject.setOwner(this);
         }
+        return this;
+    }
+
+    @Action
+    public Person addOtherObject(SimpleObject otherObject) {
+        if (otherObjects != null) {
+            otherObjects.add(otherObject);
+        }
+        return this;
     }
 }

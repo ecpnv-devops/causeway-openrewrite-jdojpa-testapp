@@ -36,10 +36,11 @@ public class Manager extends Person {
     private Set<Person> manages;
 
     @Action
-    public void addManages(Person managesPerson) {
+    public Manager addManages(Person managesPerson) {
         if (managesPerson != null) {
             manages.add(managesPerson);
             managesPerson.setManager(this);
         }
+        return this;
     }
 }

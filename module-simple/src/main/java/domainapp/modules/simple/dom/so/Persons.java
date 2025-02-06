@@ -52,6 +52,10 @@ public class Persons {
                 .orElse(null);
     }
 
+    public Person autoComplete(final String email) {
+        return findByEmail(email);
+    }
+
     @Action(semantics = SemanticsOf.SAFE)
     public List<Person> listAll() {
         return repositoryService.allInstances(Person.class);
