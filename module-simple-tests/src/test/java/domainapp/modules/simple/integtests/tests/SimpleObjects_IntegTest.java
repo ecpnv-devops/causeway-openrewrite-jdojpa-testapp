@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,6 @@ import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.commons.functional.Try;
 import org.apache.causeway.persistence.jdo.spring.exceptions.JdoResourceFailureException;
 import org.apache.causeway.testing.unittestsupport.applib.matchers.ThrowableMatchers;
-
-import lombok.val;
 
 import domainapp.modules.simple.dom.so.SimpleObject;
 import domainapp.modules.simple.dom.so.SimpleObjects;
@@ -100,7 +97,7 @@ public class SimpleObjects_IntegTest extends SimpleModuleIntegTestAbstract {
 
             // then
             assertThat(attempt.isFailure()).isTrue();
-            val failureIfAny = attempt.getFailure();
+            var failureIfAny = attempt.getFailure();
             assertThat(failureIfAny).isPresent();
             assertThat(failureIfAny.get()).isInstanceOf(JdoResourceFailureException.class);
             assertThat(failureIfAny.get()).hasMessageContaining("rollback-only");

@@ -20,8 +20,6 @@ import org.apache.causeway.commons.functional.Try;
 import org.apache.causeway.persistence.jdo.spring.exceptions.JdoResourceFailureException;
 import org.apache.causeway.testing.unittestsupport.applib.matchers.ThrowableMatchers;
 
-import lombok.val;
-
 import domainapp.modules.simple.dom.so.Person;
 import domainapp.modules.simple.dom.so.Persons;
 import domainapp.modules.simple.fixture.Person_persona;
@@ -99,7 +97,7 @@ public class Persons_IntegTest extends SimpleModuleIntegTestAbstract {
 
             // then
             assertThat(attempt.isFailure()).isTrue();
-            val failureIfAny = attempt.getFailure();
+            var failureIfAny = attempt.getFailure();
             assertThat(failureIfAny).isPresent();
             assertThat(failureIfAny.get()).isInstanceOf(JdoResourceFailureException.class);
             assertThat(failureIfAny.get()).hasMessageContaining("rollback-only");

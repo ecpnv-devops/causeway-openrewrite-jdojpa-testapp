@@ -15,8 +15,6 @@ import org.apache.causeway.applib.services.swagger.Visibility;
 import org.apache.causeway.testing.integtestsupport.applib.swagger.SwaggerExporter;
 import org.apache.causeway.viewer.restfulobjects.jaxrsresteasy.CausewayModuleViewerRestfulObjectsJaxrsResteasy;
 
-import lombok.val;
-
 import domainapp.webapp.integtests.WebAppIntegTestAbstract;
 
 @Import({
@@ -29,7 +27,7 @@ class SwaggerExport_IntegTest extends WebAppIntegTestAbstract {
 
     @Test
     void export() throws IOException {
-        val swaggerExporter = new SwaggerExporter(serviceRegistry);
+        var swaggerExporter = new SwaggerExporter(serviceRegistry);
         swaggerExporter.export(Visibility.PRIVATE, Format.JSON);
     }
 }
