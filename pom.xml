@@ -43,6 +43,7 @@
                 <configuration>
                     <activeRecipes>
                         <recipe>com.ecpnv.openrewrite.jdo2jpa.v2x</recipe>
+                        <recipe>com.ecpnv.openrewrite.jdo2jpa.v2x.causeway</recipe>
                     </activeRecipes>
                 </configuration>
                 <dependencies>
