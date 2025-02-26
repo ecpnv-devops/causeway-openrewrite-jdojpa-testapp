@@ -52,11 +52,11 @@ import domainapp.modules.simple.SimpleModule;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.CLASS_NAME)
 @Uniques({
-        @Unique(name = "Person__name__UNQ", members = {"firstName", "lastName"}),
-        @Unique(name = "Person__email__UNQ", members = {"email"})
+        @Unique(name = "Person__name__UNQ", members = {"firstName", "lastName", }),
+        @Unique(name = "Person__email__UNQ", members = {"email"}),
 })
-@Index(name = "Person__name__IDX", members = {"firstName", "lastName"})
-@Index(name = "Person__manager__IDX", members = {"manager"})
+@Index(name = "Person__name__IDX", members = {"firstName", "lastName", })
+@Index(name = "Person__manager__IDX", members = {"manager", })
 @Query(
         name = Person.NAMED_QUERY__FIND_BY_EMAIL,
         value = "SELECT " +

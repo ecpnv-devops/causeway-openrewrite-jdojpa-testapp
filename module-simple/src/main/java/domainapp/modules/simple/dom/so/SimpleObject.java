@@ -62,7 +62,7 @@ import domainapp.modules.simple.types.Notes;
     schema = SimpleModule.SCHEMA,
     identityType=IdentityType.DATASTORE)
 @Unique(
-        name = "SimpleObject__name__UNQ", members = { "name" }
+        name = "SimpleObject__name__UNQ", members = { "name", }
 )
 @Index(name="SimpleObject__lastCheckedIn__IDX", members={"lastCheckedIn"})
 @Queries({
