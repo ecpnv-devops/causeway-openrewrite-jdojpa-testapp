@@ -32,6 +32,23 @@
                             <bs3:row>
                                 <bs3:col span="12">
                                     <cpt:fieldSet name="Metadata" id="metadata"/>
+                                    <cpt:action id="links"/>
+                                    <cpt:action id="clearHints" position="PANEL"/>
+                                    <cpt:action id="rebuildMetamodel" position="PANEL"/>
+                                    <cpt:action id="recentCommands" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="recentAuditEntries" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="recentChanges" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="findChangesByDate" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="downloadLayoutXml" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="downloadJdoMetadata" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="downloadMetaModelXml" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="openInAnotherStack" position="PANEL_DROPDOWN"/>
+                                    <cpt:action id="openRestApi" position="PANEL_DROPDOWN"/>
+                                    <cpt:property id="id"/>
+                                    <cpt:property id="versionSequence"/>
+                                    <cpt:property id="datanucleusId"/>
+                                    <cpt:property id="datanucleusVersionLong"/>
+                                    <cpt:property id="datanucleusVersionTimestamp"/>
                                 </bs3:col>
                             </bs3:row>
                         </bs3:tab>
